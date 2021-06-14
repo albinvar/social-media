@@ -1,18 +1,22 @@
 language: php
-
 php:
-  - 8.0
-  - 7.3
   - 7.4
-
+  
 os: linux
+  
+services:
+  - mysql
 
 before_script:
-  - composer install
+  - mysql -e 'CREATE DATABASE social_media;'
+  - composer install --no-interaction
   - cp .env.example .env
   - php artisan key:generate
-  - yarn install
+  - php artisan migrate
+
+branches:
+  only:
+  - master
 
 script:
-  - yarn prod
   - vendor/bin/phpunit
