@@ -1,0 +1,18 @@
+language: php
+
+php:
+  - 8.0
+  - 7.3
+  - 7.4
+
+os: linux
+
+before_script:
+  - composer install
+  - cp .env.example .env
+  - php artisan key:generate
+
+script:
+  - yarn
+  - yarn prod
+  - vendor/bin/phpunit
