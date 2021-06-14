@@ -11,8 +11,8 @@ before_script:
   - composer install
   - cp .env.example .env
   - php artisan key:generate
+  - yarn install
 
 script:
-  - yarn
   - yarn prod
   - vendor/bin/phpunit
